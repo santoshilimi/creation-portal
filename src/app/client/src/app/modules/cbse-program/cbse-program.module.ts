@@ -24,17 +24,28 @@ import { CollectionHierarchyService } from './services/collection-hierarchy/coll
 import { SlickModule } from 'ngx-slick';
 import { SharedFeatureModule } from '../shared-feature';
 import { RouterModule } from '@angular/router';
-
+import { MvcLibraryComponent } from './components/mvc-library/mvc-library.component';
+import { MvcExploreComponent } from './components/mvc-explore/mvc-explore.component';
+import { MvcSuggestionComponent } from './components/mvc-suggestion/mvc-suggestion.component';
+import {CbseRoutingModule} from './cbse-routing.module';
+import { MvcListComponent } from './components/mvc-list/mvc-list.component';
+import { MvcAccordionComponent } from './components/mvc-accordion/mvc-accordion.component';
+import { FilterComponent } from './components/filter/filter.component';
+import { NoPreviewComponent } from './components/no-preview/no-preview.component';
+import { MvcContentMetadataComponent } from './components/mvc-content-metadata/mvc-content-metadata.component';
 @NgModule({
   declarations: [QuestionListComponent, QuestionCreationComponent,
     ChapterListComponent, McqCreationComponent, CkeditorToolComponent ,
     McqTemplateSelectionComponent,
     QuestionPreviewComponent, SanitizeHtmlPipe, QuestionCreationHeaderComponent,
     DashboardComponent, RecursiveTreeComponent,
-    ContentUploaderComponent,  ResourceTemplateComponent, CollectionComponent, ResourceReorderComponent, ContentEditorComponent],
+    ContentUploaderComponent,  ResourceTemplateComponent,
+     CollectionComponent, ResourceReorderComponent,
+      ContentEditorComponent, MvcLibraryComponent, MvcExploreComponent, MvcSuggestionComponent, MvcListComponent, MvcAccordionComponent, FilterComponent, NoPreviewComponent, MvcContentMetadataComponent],
   imports: [
     RouterModule,
     CommonModule,
+    CbseRoutingModule,
     SuiTabsModule,
     CommonConsumptionModule,
     SuiModule,

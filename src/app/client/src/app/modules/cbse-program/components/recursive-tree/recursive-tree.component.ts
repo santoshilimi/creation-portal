@@ -114,5 +114,9 @@ export class RecursiveTreeComponent implements OnInit {
     return !!(this.userService.userProfile.userRoles.includes('ORG_ADMIN') ||
     this.userService.userProfile.userRoles.includes('CONTENT_REVIEWER'));
   }
-
+goToAddLibrary(identifier) {
+  this.router.navigateByUrl('/contribute/nominatedtextbooks/mvcexplore/' + identifier);
 }
+}
+
+// https://dock.sunbirded.org/contribute/nominatedtextbooks/mvcexplore/f5ac80a0-75a8-11ea-8330-8113acbcca1a/
