@@ -46,6 +46,8 @@ export class RecursiveTreeComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.visibility['showDeleteResource'] = _.includes(this.programContext.config.actions.showDeleteResource.roles, this.sessionContext.currentRoleId);
     // tslint:disable-next-line:max-line-length
+    this.visibility['showRemoveResource'] = _.includes(this.programContext.config.actions.showDeleteResource.roles, this.sessionContext.currentRoleId);
+    // tslint:disable-next-line:max-line-length
     this.visibility['showPreviewResource'] = _.includes(this.programContext.config.actions.showPreviewResource.roles, this.sessionContext.currentRoleId);
     this.visibility['showActionMenu'] = this.shouldActionMenuBeVisible();
     // tslint:disable-next-line:max-line-length
@@ -59,7 +61,8 @@ export class RecursiveTreeComponent implements OnInit {
       this.visibility['showAddresource'] ||
       this.visibility['showEditResource'] ||
       this.visibility['showMoveResource'] ||
-      this.visibility['showDeleteResource']
+      this.visibility['showDeleteResource'] ||
+      this.visibility['showRemoveResource']
     );
   }
   nodeMetaEmitter(event) {
@@ -89,7 +92,14 @@ export class RecursiveTreeComponent implements OnInit {
       showPopup: null,
     });
   }
-
+  removeResource(e, content, collection) {
+    this.nodeMeta.emit({
+      action: 'remove',
+      content: content,
+      collection: collection,
+      showPopup: null,
+    });
+  }
   moveResource(e, content, collection) {
     this.nodeMeta.emit({
       action: 'beforeMove',

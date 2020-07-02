@@ -98,6 +98,14 @@
                     [telemetryInteractCdata]="telemetryInteractCdata"
                     [telemetryInteractPdata]="telemetryInteractPdata"
                     (click)="deleteResource($event, content, collection)">Delete</div>
+                    <div class="item"
+                    *ngIf="(visibility && visibility['showRemoveResource']) && content.status === 'Draft'"
+                    appTelemetryInteract
+                    [telemetryInteractEdata]="programTelemetryService.getTelemetryInteractEdata('remove-resource', 'click', 'chapter-list')"
+                    [telemetryInteractObject]="programTelemetryService.getTelemetryInteractObject(content.identifier, 'Content', '1.0', { l1: sessionContext.collection,l2: collection.identifier})"
+                    [telemetryInteractCdata]="telemetryInteractCdata"
+                    [telemetryInteractPdata]="telemetryInteractPdata"
+                    (click)="removeResource($event, content, collection)">{{resourceService.frmelmnts?.btn?.remove}}</div>
                 </div>
               </div>
             </div>
