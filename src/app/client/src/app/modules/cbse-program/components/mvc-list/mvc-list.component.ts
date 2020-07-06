@@ -8,26 +8,19 @@ import { ResourceService } from '@sunbird/shared';
 })
 export class MvcListComponent implements OnInit {
   @Input() contentList: any;
+  @Input() selectedUnitName: any;
   @Input() selectedContentId: any;
   @Output() contentChangeEvent = new EventEmitter<any>();
   @Output() moveEvent = new EventEmitter<any>();
-  public addToLibraryBtnVisibility: Boolean = false;
   public width: any;
   public height: any;
 
   constructor(public resourceService: ResourceService) { }
 
-  ngOnInit() {
-    this.addToLibraryBtnVisibility = true;
-  }
+  ngOnInit() {}
 
-  // showAddToLibraryButton() {
-  //   this.addToLibraryBtnVisibility = !this.addToLibraryBtnVisibility;
-  // }
-
-  onContentChange(identifier: any) {
-    this.addToLibraryBtnVisibility = true;
-    this.contentChangeEvent.emit({contentId: identifier});
+  onContentChange(selectedContent: any) {
+    this.contentChangeEvent.emit({content: selectedContent});
   }
 
   addToLibrary() {
