@@ -23,7 +23,7 @@
   
   <app-mvc-filter [filters]='filterData' [activeFilterData]="activeFilterData" [filterOpenStatus]="isFilterOpen" (filterChangeEvent)="onFilterChange($event);" ></app-mvc-filter>
   
-  <div class="ui container" *ngIf="!skeletonLoader && contentList.length">
+  <div class="ui container" *ngIf="!skeletonLoader && contentList?.length">
     <!-- Player Section -->
     <div class="sb-g add-to-library__toc-player">
       <!-- Left Sidebar for cards -->
@@ -57,7 +57,7 @@
   </div>
 
   <!-- not found -->
-  <div class="ui container" *ngIf="!skeletonLoader && !contentList.length">
+  <div class="ui container" *ngIf="!skeletonLoader && !contentList?.length">
     <div class="add-to-library__no-result">
       <h5 class="font-weight-bold">{{resourceService.frmelmnts.lbl.sorryThereIsNoMatchingResources}}</h5>
       <img alt="No Content available" class="mt-16" src="assets/images/offline-desktop.svg">

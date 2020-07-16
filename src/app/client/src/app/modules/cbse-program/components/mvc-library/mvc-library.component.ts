@@ -128,19 +128,14 @@ export class MvcLibraryComponent implements OnInit {
     this.skeletonLoader = true;
     const option = {
       url: this.configService.urlConFig.URLS.DOCKCONTENT_MVC.SEARCH,
-      data: {
-        request: {
-          'filters': {
-                'contentType': 'TextBook',
-                'medium': [
-                    'Telegu'
-                ],
-                'status': [
-                    'live'
-                ]
-            }
-        }
-      }
+      data:     {
+        "request": {
+         "filters": {
+         },
+         "limit": 100,
+         "facets": ["subject", "gradeLevel", "medium", "contentType"]
+     }
+    }
     };
     this.contentService.post(option).pipe(catchError(err => {
       const errInfo = { errorMsg: 'Fetching content list failed' };

@@ -191,13 +191,13 @@
   <div class="sb-modal-actions">
     <button type="button" class="sb-btn sb-btn-normal sb-btn-primary" (click)="removeMvcContentFromHierarchy()"
     appTelemetryInteract
-				[telemetryInteractEdata]="getTelemetryInteractEdata('confirm-library-content-remove', 'click', 'chapter-list')"
+				[telemetryInteractEdata]="getTelemetryInteractEdata('confirm-remove-content', 'click', 'chapter-list')"
 				[telemetryInteractObject]="telemetryInteractObject"
 				[telemetryInteractCdata]="telemetryInteractCdata"
 				[telemetryInteractPdata]="telemetryInteractPdata"> {{resourceService.frmelmnts?.btn?.yes}}</button>
     <button type="button" class="sb-btn sb-btn-normal sb-btn-primary" (click)="showRemoveConfirmationModal = false"
     appTelemetryInteract
-				[telemetryInteractEdata]="getTelemetryInteractEdata('cancel-library-content-remove', 'click', 'chapter-list')"
+				[telemetryInteractEdata]="getTelemetryInteractEdata('cancel-remove-content', 'click', 'chapter-list')"
 				[telemetryInteractObject]="telemetryInteractObject"
 				[telemetryInteractCdata]="telemetryInteractCdata"
 				[telemetryInteractPdata]="telemetryInteractPdata"> {{resourceService.frmelmnts?.btn?.no}} </button>

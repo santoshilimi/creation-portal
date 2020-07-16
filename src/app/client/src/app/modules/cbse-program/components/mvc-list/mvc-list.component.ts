@@ -24,6 +24,7 @@ export class MvcListComponent implements OnInit {
   }
 
   addToLibrary() {
+    console.log('hiiiiii');
     this.moveEvent.emit({
       action: 'beforeMove'
     });

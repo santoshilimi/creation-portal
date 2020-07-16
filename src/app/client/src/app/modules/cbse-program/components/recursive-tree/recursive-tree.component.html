@@ -11,7 +11,13 @@
         <span class="font-weight-normal">{{resourceService.frmelmnts.lbl.totalContent}}:</span> <span class="font-weight-bold"> {{collection.totalLeaf}}</span>
       </div>
      <div class="d-flex">
-        <button (click)="goToAddLibrary(collection.identifier)" class="mr-10 sb-btn sb-btn-outline-primary sb-btn-xs sb-left-icon-btn sb-btn-radius"
+        <button (click)="goToAddLibrary(collection.identifier)" 
+        class="mr-10 sb-btn sb-btn-outline-primary sb-btn-xs sb-left-icon-btn sb-btn-radius"
+        appTelemetryInteract
+        [telemetryInteractEdata]="programTelemetryService.getTelemetryInteractEdata('add-from-library', 'click', 'chapter-list')"
+        [telemetryInteractObject]="programTelemetryService.getTelemetryInteractObject(collection.identifier, 'Content', '1.0', {l1: sessionContext.collection})"
+        [telemetryInteractCdata]="telemetryInteractCdata"
+        [telemetryInteractPdata]="telemetryInteractPdata"
         popupText="Explore content from Library"  suiPopup  *ngIf="visibility && visibility['showAddresource'] && programContext?.status === 'Unlisted'">
           <i class="add icon mr-4"></i>{{resourceService.frmelmnts.lbl.addToLibrary}}</button>
       <button class="sb-btn sb-btn-outline-primary sb-btn-xs sb-left-icon-btn sb-btn-radius"
@@ -85,13 +91,13 @@
                   <div class="item"
                     *ngIf="(visibility && visibility['showMoveResource']) && content.status === 'Draft'"
                     appTelemetryInteract
-                    [telemetryInteractEdata]="programTelemetryService.getTelemetryInteractEdata('move-resource', 'click', 'chapter-list')"
+                    [telemetryInteractEdata]="programTelemetryService.getTelemetryInteractEdata('move-content', 'click', 'chapter-list')"
                     [telemetryInteractObject]="programTelemetryService.getTelemetryInteractObject(content.identifier, 'Content', '1.0', { l1: sessionContext.collection,l2: collection.identifier})"
                     [telemetryInteractCdata]="telemetryInteractCdata"
                     [telemetryInteractPdata]="telemetryInteractPdata"
                     (click)="moveResource($event, content, collection)">{{resourceService.frmelmnts.lbl.move}}</div>
                   <div class="item"
-                    *ngIf="(visibility && visibility['showDeleteResource']) && content.status === 'Draft'"
+                    *ngIf="(visibility && visibility['showDeleteResource']) && content.status === 'Draft' &&  content.label !== 'MVC'"
                     appTelemetryInteract
                     [telemetryInteractEdata]="programTelemetryService.getTelemetryInteractEdata('delete-resource', 'click', 'chapter-list')"
                     [telemetryInteractObject]="programTelemetryService.getTelemetryInteractObject(content.identifier, 'Content', '1.0', { l1: sessionContext.collection,l2: collection.identifier})"
@@ -99,9 +105,9 @@
                     [telemetryInteractPdata]="telemetryInteractPdata"
                     (click)="deleteResource($event, content, collection)">Delete</div>
                     <div class="item"
-                    *ngIf="(visibility && visibility['showRemoveResource']) && content.status === 'Draft'"
+                    *ngIf="(visibility && visibility['showRemoveResource']) && content.status === 'Draft' &&  content.label === 'MVC'"
                     appTelemetryInteract
-                    [telemetryInteractEdata]="programTelemetryService.getTelemetryInteractEdata('remove-resource', 'click', 'chapter-list')"
+                    [telemetryInteractEdata]="programTelemetryService.getTelemetryInteractEdata('remove-content', 'click', 'chapter-list')"
                     [telemetryInteractObject]="programTelemetryService.getTelemetryInteractObject(content.identifier, 'Content', '1.0', { l1: sessionContext.collection,l2: collection.identifier})"
                     [telemetryInteractCdata]="telemetryInteractCdata"
                     [telemetryInteractPdata]="telemetryInteractPdata"
