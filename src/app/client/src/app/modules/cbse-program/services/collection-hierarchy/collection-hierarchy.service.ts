@@ -203,6 +203,7 @@ export class CollectionHierarchyService {
   }
 
   getContentCountsForIndividual(contents, userId, collections?) {
+    console.log(collections, 'getContentCountsForIndividual getContentCountsForIndividual');
     const totalUserContents = this.getContentsByType(contents, userId, 'individual', 'content');
     const totalUserSampleContents = this.getContentsByType(contents, userId, 'individual', 'sample');
     let sourcingOrgStatus = {};

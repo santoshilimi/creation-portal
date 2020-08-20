@@ -412,6 +412,8 @@ export class ProgramNominationsComponent implements OnInit, AfterViewInit, OnDes
   }
 
   getDashboardData(approvedNominations) {
+    console.log( 'dashboardData 1');
+
     // tslint:disable-next-line:max-line-length
         if (!_.isEmpty(this.contentAggregationData) && approvedNominations.length && !_.isEmpty(this.programCollections)) {
           const contents = _.cloneDeep(this.contentAggregationData);
@@ -420,7 +422,10 @@ export class ProgramNominationsComponent implements OnInit, AfterViewInit, OnDes
               // tslint:disable-next-line:max-line-length
               const dashboardData = _.cloneDeep(this.collectionHierarchyService.getContentCounts(contents, nomination.organisation_id, this.programCollections));
               // This is enable sorting table. So duping the data at the root of the dashboardData object
+              console.log(dashboardData, 'dashboardData 1');
+             
               dashboardData['sourcingPending'] = dashboardData.sourcingOrgStatus && dashboardData.sourcingOrgStatus['pending'];
+              dashboardData['mvcContentCount'] = dashboardData.sourcingOrgStatus && dashboardData['mvcContentCount'];
               dashboardData['sourcingAccepted'] = dashboardData.sourcingOrgStatus && dashboardData.sourcingOrgStatus['accepted'];
               dashboardData['sourcingRejected'] = dashboardData.sourcingOrgStatus && dashboardData.sourcingOrgStatus['rejected'];
               dashboardData['contributorName'] = this.setContributorName(nomination, nomination.organisation_id ? true : false);
@@ -432,7 +437,9 @@ export class ProgramNominationsComponent implements OnInit, AfterViewInit, OnDes
             } else {
               // tslint:disable-next-line:max-line-length
               const dashboardData = _.cloneDeep(this.collectionHierarchyService.getContentCountsForIndividual(contents, nomination.user_id, this.programCollections));
+             console.log(dashboardData, 'dashboardData 2');
               dashboardData['sourcingPending'] = dashboardData.sourcingOrgStatus && dashboardData.sourcingOrgStatus['pending'];
+              dashboardData['mvcContentCount'] = dashboardData.sourcingOrgStatus && dashboardData['mvcContentCount'];
               dashboardData['sourcingAccepted'] = dashboardData.sourcingOrgStatus && dashboardData.sourcingOrgStatus['accepted'];
               dashboardData['sourcingRejected'] = dashboardData.sourcingOrgStatus && dashboardData.sourcingOrgStatus['rejected'];
               dashboardData['contributorName'] = this.setContributorName(nomination, nomination.organisation_id ? true : false);
@@ -443,6 +450,7 @@ export class ProgramNominationsComponent implements OnInit, AfterViewInit, OnDes
               };
             }
           });
+          console.log(this.contributionDashboardData, 'contributionDashboardData');
           this.getOverAllCounts(this.contributionDashboardData);
         } else if (approvedNominations.length) {
           this.contributionDashboardData = _.map(approvedNominations, nomination => {
@@ -460,12 +468,13 @@ export class ProgramNominationsComponent implements OnInit, AfterViewInit, OnDes
         rejected: 0,
         live: 0,
         sourcingPending: 0,
+        mvcContentCount: 0,
         sourcingAccepted: 0,
         sourcingRejected: 0,
         // tslint:disable-next-line:max-line-length
         contributorName: this.setContributorName(nomination, nomination.organisation_id ? true : false),
         individualStatus: {},
-        sourcingOrgStatus : {accepted: 0, rejected: 0, pending: 0},
+        sourcingOrgStatus : {accepted: 0, rejected: 0, pending: 0, mvcContentCount: 0},
         contributorDetails: nomination,
         type: nomination.organisation_id ? 'org' : 'individual'
       };
@@ -496,6 +505,7 @@ export class ProgramNominationsComponent implements OnInit, AfterViewInit, OnDes
   getOverAllCounts(dashboardData) {
     this.overAllContentCount = dashboardData.reduce((obj, v)  => {
       obj['sourcingPending'] += _.toNumber(v.sourcingPending);
+      obj['mvcContentCount'] += _.toNumber(v.mvcContentCount);
       obj['sourcingAccepted'] += _.toNumber(v.sourcingAccepted);
       obj['sourcingRejected'] += _.toNumber(v.sourcingRejected);
       return obj;
@@ -943,6 +953,7 @@ downloadContribDashboardDetails() {
           contributor.live || 0,
           contributor.type !== 'individual' ? contributor.rejected : '-',
           contributor.sourcingPending || 0,
+          contributor.mvcContentCount || 0,
           contributor.sourcingAccepted || 0,
           contributor.sourcingRejected || 0,
         ];

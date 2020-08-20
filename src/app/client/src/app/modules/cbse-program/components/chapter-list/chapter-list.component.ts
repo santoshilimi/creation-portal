@@ -967,6 +967,7 @@ export class ChapterListComponent implements OnInit, OnChanges, OnDestroy, After
       contentStatusCount['rejected'] = 0;
       contentStatusCount['approved'] = 0;
       _.forEach(contents, (content) => {
+      console.log(contents,'contents');
         if (content.organisationId === this.myOrgId && !content.sourceURL ) {
           if (content.status === 'Draft' && content.prevStatus === 'Review') {
             contentStatusCount['notAccepted'] += 1;
@@ -981,6 +982,8 @@ export class ChapterListComponent implements OnInit, OnChanges, OnDestroy, After
           }
         } else if (content.status === 'Live' && content.sourceURL && content.sourcingStatus === 'Approved'){
           contentStatusCount['approved'] += 1;
+        } else if (content.status === 'Live' && content.sourceURL && content.sourcingStatus === 'Rejected'){
+          contentStatusCount['rejected'] += 1;
         } else if (content.status === 'Live' && content.sourceURL){
           contentStatusCount['approvalPending'] += 1;
         } 
